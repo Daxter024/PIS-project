@@ -2,11 +2,10 @@ function System(){
     this.users={};
     this.addUser=function(nick){
         if(this.activeUser(nick)){
-            return 'Existing user '+ user;
+            return 'Existing user '+ nick;
         }
         this.users[nick]= new User(nick);
-        return 'User: '+ user + ' created';
-
+        return 'User: '+ nick + ' created';
     }
 
     this.getUsers = function(){
@@ -34,3 +33,4 @@ function User(nick){
 }
 
 module.exports.System = System;
+module.exports.User = User;

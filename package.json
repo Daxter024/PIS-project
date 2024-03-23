@@ -11,6 +11,7 @@
   "author": "Fran Cañadas",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.1"
+    "express": "^4.19.1",
+    "jasmine-node": "^3.0.0"
   }
 }
