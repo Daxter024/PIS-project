@@ -1,0 +1,16 @@
+{
+  "name": "pis-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "testW": "node_modules\\.bin\\jasmine-node server",
+    "test": "./node_modules/.bin/jasmine-node server"
+  },
+  "author": "Fran Cañadas",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.1"
+  }
+}
