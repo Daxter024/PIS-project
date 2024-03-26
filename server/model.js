@@ -1,30 +1,41 @@
 function System(){
     this.users={};
     this.addUser=function(nick){
-        if(this.activeUser(nick)){
-            return 'Existing user '+ nick;
+        let res ={"nick":-1};
+        if(this.users[nick]){
+            console.log("Existing user "+ nick);
+        }else{
+            this.users[nick]= new User(nick);
+            res.nick = nick;
         }
-        this.users[nick]= new User(nick);
-        return 'User: '+ nick + ' created';
+        return res;
     }
 
     this.getUsers = function(){
-        return this.users;
+        let res ={"users": this.users};
+        return res;
     }
 
     this.activeUser = function(nick){
+        let res = {"active": false};
         if(this.users[nick]){
-            return true;
+            res.active = true;
         }
-        return false;
+        return res;
     }
 
     this.deleteUser = function(nick){
-        delete this.users[nick];
+        let res = {"deleted": false};
+        if(this.users[nick]){
+            res.deleted = delete this.users[nick]; 
+        }
+        return res;
     }
 
     this.numberUsers = function(){
-        return Object.keys(this.users).length;
+        let res = {"num": 0}
+        res.num = Object.keys(this.users).length;
+        return res;
     }
 }
 
