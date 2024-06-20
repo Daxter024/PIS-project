@@ -1,5 +1,6 @@
 function ClientRest(){
     this.addUser=function(nick){
+        var cli = this;
         $.getJSON("/addUser/"+nick, function(data) {
             if(data.nick != -1){
                 console.log("User: "+ data.nick + " created");
@@ -10,6 +11,7 @@ function ClientRest(){
     }
 
     this.getUsers = function(){
+        var cli = this;
         $.getJSON("/getUsers", function(data) {
             traverse(data.users);
             function traverse(obj) {
@@ -27,6 +29,7 @@ function ClientRest(){
     }
 
     this.activeUser = function(nick){
+        var cli = this;
         $.getJSON("/activeUser/"+nick, function(data) {
             if(data.active){
                 console.log("User: "+ nick + " is active");
@@ -37,12 +40,14 @@ function ClientRest(){
     }
 
     this.numberUsers = function(){
+        var cli = this;
         $.getJSON("/numberUsers", function(data) {
             console.log("Number of users: "+ data.num);
         });
     }
 
     this.deleteUser = function(nick){
+        var cli = this;
         $.getJSON("/deleteUser/"+nick, function(data) {
             if(data.deleted){
                 console.log("User: "+ nick + " deleted");
