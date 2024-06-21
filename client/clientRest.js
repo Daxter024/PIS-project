@@ -1,9 +1,11 @@
 function ClientRest(){
+
     this.addUser=function(nick){
         var cli = this;
         $.getJSON("/addUser/"+nick, function(data) {
             if(data.nick != -1){
                 console.log("User: "+ data.nick + " created");
+                localStorage.setItem("nick",nick);
             }else{
                 console.log("Existing user "+ nick);
             }

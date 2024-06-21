@@ -8,10 +8,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- <script src="./model.js"></script-->
     <script src="./client/clientRest.js"></script>
+    <script src="./client/controlWeb.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+<div id="welcomeMsg"> </div>
+<div id ="addUser"> </div>
+<div id ="login-container"></div>
+<div id="register-container"></div>
+<!-- <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
       <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
@@ -48,7 +53,14 @@
         <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Start a 14 day free trial</a>
       </p>
     </div>
-  </div>
-  
+  </div> -->
+
+  <script>
+    rest = new ClientRest();
+    cw = new ControlWeb();
+    cw.checkSession();
+    // cw.showAddUser();
+    // cw.showLogin();
+  </script>
 </body>
 </html>
