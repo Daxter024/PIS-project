@@ -12,31 +12,10 @@ function ControlWeb(){
         let nick = localStorage.getItem("nick");
         if(nick){
             cw.welcomeModal(nick);
+            cw.showHomePage();
         }else{
             cw.showLogin();
         }
-    }
-
-    this.welcomeModal = function(nick){
-        let modal = '';
-        modal += '<div id="welcomeModal" class="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-gray-900 bg-opacity-50">';
-        modal += '  <div class="bg-white rounded-lg shadow-lg dark:bg-gray-800">';
-        modal += '    <div class="p-6">';
-        modal += '      <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Bienvenido al sistema, ' + nick + '</h2>';
-        modal += '      <p class="text-gray-700 dark:text-gray-300">Haz clic en el botón de abajo para continuar.</p>';
-        modal += '      <div class="mt-6 flex justify-end">';
-        modal += '        <button id="closeModalButton" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Cerrar</button>';
-        modal += '      </div>';
-        modal += '    </div>';
-        modal += '  </div>';
-        modal += '</div>';
-
-        $("#welcomeMsg").append(modal);
-
-        $("#closeModalButton").on("click",function(){
-            //TODO every time i press F5 this modal ll be showing up, do something!! 
-            $("#welcomeModal").remove();
-        });
     }
 
     this.showLogin = function(){
@@ -67,7 +46,7 @@ function ControlWeb(){
         cadena += '                                <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-2563eb dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-2563eb dark:ring-offset-gray-800" required>';
         cadena += '                            </div>';
         cadena += '                            <div class="ml-3 text-sm">';
-        cadena += '                                <label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>';
+        cadena += '                                <label id="remember" for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>';
         cadena += '                            </div>';
         cadena += '                        </div>';
         cadena += '                        <a href="#" class="text-sm font-medium" style="color: #2563eb;">Forgot password?</a>';
@@ -84,6 +63,16 @@ function ControlWeb(){
         
 
         $("#login-container").append(cadena);
+
+        $("#remember").change(function(){
+            if(this.checked){
+                //TODO save cookie localStorage
+            }
+            else
+            {
+
+            }
+        });
 
         $("#btnLogin").on("click",function(){
             // call rest
@@ -125,6 +114,59 @@ function ControlWeb(){
         registerForm += '</section>';
 
         $("#register-container").append(registerForm);
+
+        $("#btnRegister").on("click",function(){
+            // let nick = $("#nick").val();
+            // let email = $("#email").val();
+            // let password = $("#password").val();
+            // rest.register(nick,email,password);
+        });
+    }
+
+    // this.closeSession = function(){
+    //     localStorage.removeItem("nick");
+    //     location.reload();
+    // }
+
+    this.welcomeModal = function(nick){
+        let modal = '';
+        modal += '<div id="welcomeModal" class="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-gray-900 bg-opacity-50">';
+        modal += '  <div class="bg-white rounded-lg shadow-lg dark:bg-gray-800">';
+        modal += '    <div class="p-6">';
+        modal += '      <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Bienvenido al sistema, ' + nick + '</h2>';
+        modal += '      <p class="text-gray-700 dark:text-gray-300">Haz clic en el botón de abajo para continuar.</p>';
+        modal += '      <div class="mt-6 flex justify-end">';
+        modal += '        <button id="closeModalButton" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Cerrar</button>';
+        modal += '      </div>';
+        modal += '    </div>';
+        modal += '  </div>';
+        modal += '</div>';
+
+        $("#welcomeMsg").append(modal);
+
+        $("#closeModalButton").on("click",function(){
+            //TODO every time i press F5 this modal ll be showing up, do something!! 
+            $("#welcomeModal").remove();
+        });
+    }
+
+    this.showHomePage = function(){
+        let homePage = '';
+        homePage += '<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900">';
+        homePage += '    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-md w-full">';
+        homePage += '        <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Bienvenido al sistema, <span id="nick"></span></h2>';
+        homePage += '        <p class="mb-4 text-gray-700 dark:text-gray-300">¡Esperamos que disfrutes de tu experiencia!</p>';
+        homePage += '        <button id="logoutButton" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Cerrar Sesión</button>';
+        homePage += '    </div>';
+        homePage += '</div>';
+
+        $("#homePage").append(homePage);
+
+        $("#logoutButton").on("click",function(){
+            // rest.closeSession();
+            localStorage.removeItem("nick");
+            location.reload();
+        });
     }
 
     this.showAddUser = function(){

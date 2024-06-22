@@ -6,6 +6,7 @@ function ClientRest(){
             if(data.nick != -1){
                 console.log("User: "+ data.nick + " created");
                 localStorage.setItem("nick",nick);
+                // used when remmeber me is checked
             }else{
                 console.log("Existing user "+ nick);
             }
