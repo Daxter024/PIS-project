@@ -37,14 +37,18 @@ app.get('/failure', function(req, res) {
 });
 
 app.get('/good', function(req, res) {
-    let nick = req.user.emails[0].value;
-    if(nick){
-        system.addUser(nick);
-    }
-    res.cookie("nick", nick);
+    let email = req.user.emails[0].value;
+    system.googleUser({"email":email},function(obj){
+        res.cookie("nick", obj.email);
+        res.redirect('/');
+    })
+    // if(nick){
+    //     system.addUser(nick);
+    // }
+    // res.cookie("nick", nick);
     // res.storage.setItem("nick",nick);
     // res.redirect('/home');
-    res.redirect('/');
+    // res.redirect('/');
 });
 
 

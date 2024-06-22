@@ -15,6 +15,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.1",
     "jasmine-node": "^3.0.0",
+    "mongodb": "^4.4.0",
     "passport": "^0.5.3",
     "passport-google-oauth20": "^2.0.0"
   }

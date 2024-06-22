@@ -1,5 +1,15 @@
+const data=require("./dal.js");
+
 function System(){
     this.users={};
+    this.dal = new data.Dal();
+
+    this.googleUser=function(usr,callback){
+        this.dal.findOrCreateUser(usr, function(obj){
+            callback(obj);
+        });
+    }
+    
     this.addUser=function(nick){
         let res ={"nick":-1};
         if(this.users[nick]){
@@ -37,6 +47,10 @@ function System(){
         res.num = Object.keys(this.users).length;
         return res;
     }
+
+    this.dal.connect(function(db){
+        console.log("Database connected");
+    });
 }
 
 function User(nick){
