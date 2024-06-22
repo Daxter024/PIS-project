@@ -4,6 +4,7 @@ const app = express();
 const model = require('./server/model.js');
 const passport = require("passport");
 const cookieSession = require("cookie-session");
+const bodyParser = require('body-parser');
 require("./server/passport-setup.js");
 require('dotenv').config();
 
@@ -13,6 +14,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(__dirname + "/"));
 let system = new model.System();
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use(cookieSession({
     name: "System",
@@ -29,6 +32,10 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'em
 app.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failure' }), function(req, res) {
     // res.redirect('/home');
     res.redirect('/good')
+});
+
+app.post('/oneTap/callback', passport.authenticate('google-one-tap', {failureRedirect: '/failure'}), function(req, res) {
+    res.redirect('/good');
 });
 
 app.get('/failure', function(req, res) {
