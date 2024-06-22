@@ -10,6 +10,12 @@ function ControlWeb(){
 
     this.checkSession = function(){
         let nick = localStorage.getItem("nick");
+        // let nick = $.cookie("nick");
+        // if(!nick){
+        //     console.log("no nick");
+        //     nick = $.cookie("nick");
+        // }
+        //TODO add cookie because when someone sign in with google it doesn't work
         if(nick){
             cw.welcomeModal(nick);
             cw.showHomePage();
@@ -29,8 +35,33 @@ function ControlWeb(){
         cadena += '        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">';
         cadena += '            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">';
         cadena += '                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">';
-        cadena += '                    Sign in to your account';
+        cadena += '                    Welcome back';
         cadena += '                </h1>';
+        // cadena += '                <div class="flex justify-between">';
+        // cadena += '                     <button class="w-full mr-2 py-2 px-4 flex items-center justify-center bg-white text-gray-800 rounded-lg shadow hover:bg-gray-100">';
+        // cadena += '                         <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" class="w-4 h-4 mr-2">';
+        // cadena += '                             Sign in with Google';
+        // cadena += '                         </button>';
+        // cadena += '                     <button class="w-full ml-2 py-2 px-4 flex items-center justify-center bg-white text-gray-800 rounded-lg shadow hover:bg-gray-100">';
+        // cadena += '                         <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo" class="w-4 h-4 mr-2">';
+        // cadena += '                             Sign in with Apple';
+        // cadena += '                     </button>';
+        // cadena += '                </div>';
+        cadena += '                 <div class="flex justify-between">';
+        cadena += '                     <a href="/auth/google" class="w-full mr-2 py-2 px-4 flex items-center justify-center bg-white text-gray-800 rounded-lg shadow hover:bg-gray-100">';
+        cadena += '                         <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" class="flex w-4 h-4 mr-5">';
+        cadena += '                             Sign in with Google';
+        cadena += '                     </a>';
+        cadena += '                     <a href="/auth/apple" class="w-full ml-2 py-2 px-4 flex items-center justify-center bg-white text-gray-800 rounded-lg shadow hover:bg-gray-100">';
+        cadena += '                         <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo" class="flex w-4 h-4 mr-2">';
+        cadena += '                             Sign in with Apple';
+        cadena += '                     </a>';
+        cadena += '                 </div>';
+        cadena += '                <div class="relative flex py-2 items-center">';
+        cadena += '                    <div class="flex-grow border-t border-gray-400"></div>';
+        cadena += '                    <span class="flex-shrink mx-4 text-gray-400">or</span>';
+        cadena += '                    <div class="flex-grow border-t border-gray-400"></div>';
+        cadena += '                </div>';   
         cadena += '                <form class="space-y-4 md:space-y-6" action="#">';
         cadena += '                    <div>';
         cadena += '                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>';
