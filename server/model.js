@@ -9,6 +9,26 @@ function System(){
             callback(obj);
         });
     }
+
+    this.registerUser=function(obj, callback){
+        let model = this;
+        if(!obj.nick){
+            obj.nick = obj.email;
+        }
+        this.dal.findUser(obj,function(usr){
+            if(!usr){
+                model.dal.insertUser(obj, function(res){
+                    console.log("insertado");
+                    console.log(res);
+                    callback(res);
+                });
+            }
+            else{
+                // user already exists
+                callback({"email":-1});
+            }
+        });
+    }
     
     this.addUser=function(nick){
         let res ={"nick":-1};

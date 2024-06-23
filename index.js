@@ -65,6 +65,12 @@ app.get('/', function(req, res) {
     res.send(content);
 });
 
+app.post('/registerUser',function(req,response){
+    system.registerUser(req.body, function(res){
+        response.send({"nick":res.email});
+    });
+});
+
 app.get('/addUser/:nick',function(req,res){
     // Should be a post request but i need to check it with postman
     let nick = req.params.nick;

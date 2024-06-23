@@ -1,5 +1,34 @@
 function ClientRest(){
 
+    this.registerUser = function(email, password){
+        $.ajax({
+            type: "POST",
+            url: "/registerUser",
+            data: JSON.stringify({"email":email,"password":password}),
+            success: function (data) {
+                console.log("data: "+data);
+                if(data.nick!=-1){
+                    console.log("User: "+ data.nick + " registered");
+                    localStorage.setItem("nick",data.nick);
+                    cw.clean();
+                    cw.showLogin();
+                    cw.welcomeModal(data.nick);
+                    // TODO modal to show "Now use ur credentials to login"
+                    // $.cookie("nick", data.nick);
+                }else{
+                    console.log("User: "+ data.nick + " already exits");
+                }
+                // cw.clean();
+                // cw.welcomeModal(data.nick);
+            },
+            error:function(xhr, textStatus, errorThrown){
+                console.log("Status: "+textStatus);
+                console.log("Error: "+errorThrown);
+            },
+            contentType: "application/json",
+        });
+    }
+
     this.addUser=function(nick){
         var cli = this;
         $.getJSON("/addUser/"+nick, function(data) {

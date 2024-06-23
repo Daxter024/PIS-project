@@ -4,12 +4,19 @@ const mongo = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectId;
 function Dal() {
     this.users;
-    console.log(this.users);
-
 
     this.findOrCreateUser = function(usr, callback){
         findOrCreate(this.users,usr,callback);
     }
+
+    this.findUser = function(usr, callback){
+        find(this.users, {"email":usr.email}, callback);
+    }
+
+    this.insertUser = function(usr, callback){
+        insert(this.users, usr, callback);
+    }
+
     function findOrCreate(collection,criterio,callback)
     {
         collection.findOneAndUpdate(criterio, {$set: criterio}, {upsert: true,returnDocument:"after",projection:{email:1}}, function(err,doc) {
@@ -20,7 +27,28 @@ function Dal() {
             }
          });  
     }
+    
+    function find(collection, condition, callback){
+        collection.find(condition).toArray(function(err, usrs){
+            if(usrs.length==0){
+                callback(undefined);
+            }else{
+                callback(usrs[0]);
+            }
+        });
+    }
 
+    function insert(collection, element, callback){
+        collection.insertOne(element, function(err, res){
+            if(err){
+                console.log(err);
+                // callback(undefined);
+            }else{
+                console.log("element: ", element);
+                callback(element);
+            }
+        })
+    }
     
     this.connect = async function(callback){
         let dal = this;
