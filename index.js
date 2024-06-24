@@ -60,14 +60,7 @@ app.get('/good', function(req, res) {
     system.googleUser({"email":email},function(obj){
         res.cookie("nick", obj.email);
         res.redirect('/');
-    })
-    // if(nick){
-    //     system.addUser(nick);
-    // }
-    // res.cookie("nick", nick);
-    // res.storage.setItem("nick",nick);
-    // res.redirect('/home');
-    // res.redirect('/');
+    });
 });
 
 
@@ -125,7 +118,16 @@ const userLogged = function(req, res, next) {
     }else{
         res.redirect('/');
     }
-} 
+}
+
+app.get('/closeSession', userLogged,function(req,res){
+    let nick = req.user.email;
+    req.logout();
+    res.redirect('/');
+    if(nick){
+        system.deleteUser(nick);
+    }
+});
 
 app.get('/addUser/:nick', userLogged,function(req,res){
     // Should be a post request but i need to check it with postman

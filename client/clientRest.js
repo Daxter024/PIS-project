@@ -14,12 +14,9 @@ function ClientRest(){
                     cw.showLogin();
                     cw.welcomeModal(data.nick);
                     // TODO modal to show "Now use ur credentials to login"
-                    // $.cookie("nick", data.nick);
                 }else{
                     console.log("User: "+ data.nick + " already exists");
                 }
-                // cw.clean();
-                // cw.welcomeModal(data.nick);
             },
             error:function(xhr, textStatus, errorThrown){
                 console.log("Status: "+textStatus);
@@ -37,16 +34,20 @@ function ClientRest(){
             success: function(data) {
                 if(data.email != -1){
                     console.log("User: " + data.email + " logged");
-                    cookie ? localStorage.setItem("nick",data.email) : console.log("no remember");
-                    // data.remember ? $.cookie("nick", data.email) : "";
-                    // localStorage.setItem("nick",data.nick);
+                    cookie ? $.cookie("nick", data.email) : console.log("no remember");
                     cw.clean();
                     cw.showHomePage();
-                    // $.cookie("nick", data.nick);
                 }else{
                     console.log("User: " + data.email + " doesn't exist");
                 }
             }
+        });
+    }
+
+    this.closeSession = function(){
+        $.getJSON("/closeSession", function(data) {
+            console.log("Session closed");
+            $.removeCookie("nick");
         });
     }
 

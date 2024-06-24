@@ -11,13 +11,7 @@ function ControlWeb(){
     }
 
     this.checkSession = function(){
-        let nick = localStorage.getItem("nick");
-        // let nick = $.cookie("nick");
-        // if(!nick){
-        //     console.log("no nick");
-        //     nick = $.cookie("nick");
-        // }
-        //TODO add cookie because when someone sign in with google it doesn't work
+        let nick = $.cookie("nick");
         if(nick){
             cw.welcomeModal(nick);
             cw.showHomePage();
@@ -60,11 +54,6 @@ function ControlWeb(){
         });
     }
 
-    // this.closeSession = function(){
-    //     localStorage.removeItem("nick");
-    //     location.reload();
-    // }
-
     this.welcomeModal = function(nick){
         let modal = '';
         modal += '<div id="welcomeModal" class="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-gray-900 bg-opacity-50">';
@@ -102,9 +91,14 @@ function ControlWeb(){
 
         $("#logoutButton").on("click",function(){
             // rest.closeSession();
-            localStorage.removeItem("nick");
-            location.reload();
+            cw.closeSession();
         });
+    }
+
+    this.closeSession = function(){
+        $.removeCookie("nick");
+        location.reload();
+        rest.closeSession();
     }
 
     this.showAddUser = function(){
