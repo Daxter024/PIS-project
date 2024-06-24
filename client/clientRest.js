@@ -16,7 +16,7 @@ function ClientRest(){
                     // TODO modal to show "Now use ur credentials to login"
                     // $.cookie("nick", data.nick);
                 }else{
-                    console.log("User: "+ data.nick + " already exits");
+                    console.log("User: "+ data.nick + " already exists");
                 }
                 // cw.clean();
                 // cw.welcomeModal(data.nick);
@@ -26,6 +26,27 @@ function ClientRest(){
                 console.log("Error: "+errorThrown);
             },
             contentType: "application/json",
+        });
+    }
+    this.loginUser = function(email, password, cookie){
+        $.ajax({
+            type: 'POST',
+            url: "/loginUser",
+            contentType: 'application/json',
+            data: JSON.stringify({"email": email, "password": password}),
+            success: function(data) {
+                if(data.email != -1){
+                    console.log("User: " + data.email + " logged");
+                    cookie ? localStorage.setItem("nick",data.email) : console.log("no remember");
+                    // data.remember ? $.cookie("nick", data.email) : "";
+                    // localStorage.setItem("nick",data.nick);
+                    cw.clean();
+                    cw.showHomePage();
+                    // $.cookie("nick", data.nick);
+                }else{
+                    console.log("User: " + data.email + " doesn't exist");
+                }
+            }
         });
     }
 

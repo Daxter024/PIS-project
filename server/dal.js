@@ -10,7 +10,7 @@ function Dal() {
     }
 
     this.findUser = function(usr, callback){
-        find(this.users, {"email":usr.email}, callback);
+        find(this.users, usr, callback);
     }
 
     this.insertUser = function(usr, callback){
@@ -29,6 +29,8 @@ function Dal() {
     }
     
     function find(collection, condition, callback){
+        console.log("condition: ", condition);
+        // console.log("collection: ", collection);
         collection.find(condition).toArray(function(err, usrs){
             if(usrs.length==0){
                 callback(undefined);

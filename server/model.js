@@ -15,6 +15,7 @@ function System(){
         if(!obj.nick){
             obj.nick = obj.email;
         }
+        console.log(obj);
         this.dal.findUser(obj,function(usr){
             if(!usr){
                 model.dal.insertUser(obj, function(res){
@@ -25,6 +26,24 @@ function System(){
             }
             else{
                 // user already exists
+                callback({"email":-1});
+            }
+        });
+    }
+
+    this.loginUser=function(obj, callback){
+        let model = this;
+        console.log("obj ",obj);
+        this.dal.findUser(obj,function(usr){
+            // console.log(usr);
+            // console.log(obj.email);
+            if(usr){
+                console.log("User: "+ usr.email + " logged");
+                callback(usr);
+            }
+            else{
+                console.log("User: "+ obj.email + " not found");
+                // user not found
                 callback({"email":-1});
             }
         });

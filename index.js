@@ -68,8 +68,28 @@ app.get('/', function(req, res) {
 app.post('/registerUser',function(req,response){
     system.registerUser(req.body, function(res){
         response.send({"nick":res.email});
+        // response.redirect('/');
     });
 });
+
+app.post('/loginUser', function(req, res) {
+    const { email, password } = req.body;
+    console.log("email: "+email+" password: "+password);
+
+    if (!email || !password) {
+        return res.status(400).send({ error: 'Email and password are required' });
+    }
+
+    system.loginUser({ email, password }, function(result) {
+        if (!result) {
+            return res.status(401).send({ email: -1 });
+        }
+        console.log(result.email);
+        res.send({ email: result.email });
+    });
+});
+
+
 
 app.get('/addUser/:nick',function(req,res){
     // Should be a post request but i need to check it with postman

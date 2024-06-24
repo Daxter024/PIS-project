@@ -7,6 +7,7 @@ function ControlWeb(){
         $("#addUser").empty();
         $("#login-container").empty();
         $("#register-container").empty();
+        $("#homePage").empty();
     }
 
     this.checkSession = function(){
@@ -26,88 +27,17 @@ function ControlWeb(){
     }
 
     this.showLogin = function(){
-        let cadena = '';
-        cadena += '<section class="bg-gray-50 dark:bg-gray-900">';
-        cadena += '    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">';
-        cadena += '        <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">';
-        cadena += '            <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">';
-        cadena += '            Flowbite';
-        cadena += '        </a>';
-        cadena += '        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">';
-        cadena += '            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">';
-        cadena += '                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">';
-        cadena += '                    Welcome back';
-        cadena += '                </h1>';
-        // cadena += '                <div class="flex justify-between">';
-        // cadena += '                     <button class="w-full mr-2 py-2 px-4 flex items-center justify-center bg-white text-gray-800 rounded-lg shadow hover:bg-gray-100">';
-        // cadena += '                         <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" class="w-4 h-4 mr-2">';
-        // cadena += '                             Sign in with Google';
-        // cadena += '                         </button>';
-        // cadena += '                     <button class="w-full ml-2 py-2 px-4 flex items-center justify-center bg-white text-gray-800 rounded-lg shadow hover:bg-gray-100">';
-        // cadena += '                         <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo" class="w-4 h-4 mr-2">';
-        // cadena += '                             Sign in with Apple';
-        // cadena += '                     </button>';
-        // cadena += '                </div>';
-        cadena += '                 <div class="flex justify-between">';
-        cadena += '                     <a href="/auth/google" class="w-full mr-2 py-2 px-4 flex items-center justify-center bg-white text-gray-800 rounded-lg shadow hover:bg-gray-100">';
-        cadena += '                         <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" class="flex w-4 h-4 mr-5">';
-        cadena += '                             Sign in with Google';
-        cadena += '                     </a>';
-        cadena += '                     <a href="/auth/apple" class="w-full ml-2 py-2 px-4 flex items-center justify-center bg-white text-gray-800 rounded-lg shadow hover:bg-gray-100">';
-        cadena += '                         <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo" class="flex w-4 h-4 mr-2">';
-        cadena += '                             Sign in with Apple';
-        cadena += '                     </a>';
-        cadena += '                 </div>';
-        cadena += '                <div class="relative flex py-2 items-center">';
-        cadena += '                    <div class="flex-grow border-t border-gray-400"></div>';
-        cadena += '                    <span class="flex-shrink mx-4 text-gray-400">or</span>';
-        cadena += '                    <div class="flex-grow border-t border-gray-400"></div>';
-        cadena += '                </div>';   
-        cadena += '                <form class="space-y-4 md:space-y-6" action="#">';
-        cadena += '                    <div>';
-        cadena += '                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>';
-        cadena += '                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-2563eb focus:border-2563eb block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-3b82f6 dark:focus:border-3b82f6" placeholder="name@company.com" required>';
-        cadena += '                    </div>';
-        cadena += '                    <div>';
-        cadena += '                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>';
-        cadena += '                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-2563eb focus:border-2563eb block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-3b82f6 dark:focus:border-3b82f6" required>';
-        cadena += '                    </div>';
-        cadena += '                    <div class="flex items-center justify-between">';
-        cadena += '                        <div class="flex items-start">';
-        cadena += '                            <div class="flex items-center h-5">';
-        cadena += '                                <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-2563eb dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-2563eb dark:ring-offset-gray-800" required>';
-        cadena += '                            </div>';
-        cadena += '                            <div class="ml-3 text-sm">';
-        cadena += '                                <label id="remember" for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>';
-        cadena += '                            </div>';
-        cadena += '                        </div>';
-        cadena += '                        <a href="#" class="text-sm font-medium" style="color: #2563eb;">Forgot password?</a>';
-        cadena += '                    </div>';
-        cadena += '                    <button id="btnLogin" type="submit" class="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center focus:ring-4 focus:outline-none border" style="background-color: #2563eb; border-color: #3b82f6; hover:bg-1d4ed8; focus:ring-1d4ed8;">Sign in</button>';
-        cadena += '                    <p class="text-sm font-light text-gray-500 dark:text-gray-400">';
-        cadena += '                        Don’t have an account yet? <a href="#" class="font-medium" style="color: #2563eb;" onclick="cw.showSignUp()">Sign up</a>';
-        cadena += '                    </p>';
-        cadena += '                </form>';
-        cadena += '            </div>';
-        cadena += '        </div>';
-        cadena += '    </div>';
-        cadena += '</section>';
-        
 
-        $("#login-container").append(cadena);
-
-        $("#remember").change(function(){
-            if(this.checked){
-                //TODO save cookie localStorage
-            }
-            else
-            {
-
-            }
-        });
-
-        $("#btnLogin").on("click",function(){
-            // call rest
+        $("#login-container").load("./client/login.html", function(){
+            $("#btnLogin").on("click",function(){
+                let email = $("#email").val();
+                let password = $("#password").val();
+                let cookie = $("#remember").is(":checked");
+                if(email && password){
+                    console.log(email, password, cookie);
+                    rest.loginUser(email, password, cookie);
+                }
+            });
         });
     }
 
@@ -158,6 +88,7 @@ function ControlWeb(){
     }
 
     this.showHomePage = function(){
+        this.clean();
         let homePage = '';
         homePage += '<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900">';
         homePage += '    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-md w-full">';
