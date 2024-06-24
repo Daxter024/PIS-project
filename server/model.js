@@ -1,4 +1,5 @@
 const data=require("./dal.js");
+const correo = require("./email.js");
 
 function System(){
     this.users={};
@@ -18,11 +19,14 @@ function System(){
         console.log(obj);
         this.dal.findUser(obj,function(usr){
             if(!usr){
+                obj.key = Date.now().toString();
+                obj.confirmed = false;
                 model.dal.insertUser(obj, function(res){
                     console.log("insertado");
                     console.log(res);
                     callback(res);
                 });
+                correo.sendEmail(obj.email, obj.key, "Confirm your account");
             }
             else{
                 // user already exists
@@ -34,16 +38,30 @@ function System(){
     this.loginUser=function(obj, callback){
         let model = this;
         console.log("obj ",obj);
-        this.dal.findUser(obj,function(usr){
+        this.dal.findUser({"email":obj.email, "confirmed":true},function(usr){
             // console.log(usr);
             // console.log(obj.email);
-            if(usr){
+            if(usr && usr.password == obj.password){
                 console.log("User: "+ usr.email + " logged");
                 callback(usr);
             }
             else{
                 console.log("User: "+ obj.email + " not found");
                 // user not found
+                callback({"email":-1});
+            }
+        });
+    }
+
+    this.verifyUser=function(obj, callback){
+        let model = this;
+        this.dal.findUser({"email":obj.email,"confirmed":false, "key":obj.key},function(usr){
+            if(usr){
+                usr.confirmed = true;
+                model.dal.updateUser(usr, function(res){
+                    callback({"email": res.email});
+                });
+            }else{
                 callback({"email":-1});
             }
         });

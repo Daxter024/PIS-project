@@ -5,6 +5,7 @@ const model = require('./server/model.js');
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 const bodyParser = require('body-parser');
+const LocalStrategy = require('passport-local').Strategy;
 require("./server/passport-setup.js");
 require('dotenv').config();
 
@@ -24,6 +25,17 @@ app.use(cookieSession({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+    },
+    function(email, password, done) {
+        system.loginUser({"email":email, "password":password}, function(usr){
+            return done(null, usr);
+        });
+    }
+));
 
 // API endpoints
 
@@ -72,24 +84,39 @@ app.post('/registerUser',function(req,response){
     });
 });
 
-app.post('/loginUser', function(req, res) {
-    const { email, password } = req.body;
-    console.log("email: "+email+" password: "+password);
+app.post('/loginUser', passport.authenticate('local', {failureRedirect: '/failure', successRedirect: '/ok'}));
 
-    if (!email || !password) {
-        return res.status(400).send({ error: 'Email and password are required' });
-    }
-
-    system.loginUser({ email, password }, function(result) {
-        if (!result) {
-            return res.status(401).send({ email: -1 });
-        }
-        console.log(result.email);
-        res.send({ email: result.email });
-    });
+app.get('/ok', function(req, res) {
+    res.send({email:req.user.email});
 });
 
+// app.post('/loginUser',  function(req, res) {
+//     const { email, password } = req.body;
+//     console.log("email: "+email+" password: "+password);
 
+//     if (!email || !password) {
+//         return res.status(400).send({ error: 'Email and password are required' });
+//     }
+
+//     system.loginUser({ email, password }, function(result) {
+//         if (!result) {
+//             return res.status(401).send({ email: -1 });
+//         }
+//         console.log(result.email);
+//         res.send({ email: result.email });
+//     });
+// });
+
+app.get("/verifyUser/:email/:key", function(req, res) {
+    let email = req.params.email;
+    let key = req.params.key;
+    system.verifyUser({"email":email, "key":key}, function(usr) {
+        if(usr.email != -1){
+            res.cookie("nick", usr.email);
+        }
+        res.redirect('/');
+    });
+});
 
 app.get('/addUser/:nick',function(req,res){
     // Should be a post request but i need to check it with postman

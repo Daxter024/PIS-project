@@ -1,4 +1,3 @@
-
 //data accesss layer
 const mongo = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectId;
@@ -15,6 +14,10 @@ function Dal() {
 
     this.insertUser = function(usr, callback){
         insert(this.users, usr, callback);
+    }
+
+    this.updateUser = function(usr, callback){
+        update(this.users, usr, callback);
     }
 
     function findOrCreate(collection,criterio,callback)
@@ -50,6 +53,17 @@ function Dal() {
                 callback(element);
             }
         })
+    }
+
+    function update(collection, element, callback){
+        collection.findOneAndUpdate({_id:ObjectId(element._id)}, {$set: element}, {upsert: false, returnDocument:"after", projection:{email:1}},
+        function(err, res){
+            if(err){throw err;}
+            else{
+                console.log("Element updated");
+                callback({email:res.value.email});
+            }
+        });
     }
     
     this.connect = async function(callback){
