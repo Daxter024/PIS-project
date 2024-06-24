@@ -118,7 +118,16 @@ app.get("/verifyUser/:email/:key", function(req, res) {
     });
 });
 
-app.get('/addUser/:nick',function(req,res){
+// use to know if the user has been logged before he does any action
+const userLogged = function(req, res, next) {
+    if(req.user){
+        next();
+    }else{
+        res.redirect('/');
+    }
+} 
+
+app.get('/addUser/:nick', userLogged,function(req,res){
     // Should be a post request but i need to check it with postman
     let nick = req.params.nick;
     let result = system.addUser(nick);

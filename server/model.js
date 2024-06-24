@@ -1,5 +1,6 @@
 const data=require("./dal.js");
 const correo = require("./email.js");
+const bcrypt = require('bcrypt');
 
 function System(){
     this.users={};
@@ -17,10 +18,13 @@ function System(){
             obj.nick = obj.email;
         }
         console.log(obj);
-        this.dal.findUser(obj,function(usr){
+        this.dal.findUser(obj, async function(usr){
             if(!usr){
                 obj.key = Date.now().toString();
                 obj.confirmed = false;
+                const hash = await bcrypt.hash(obj.password, 10);
+                // obj.password = bcrypt.hashSync(obj.password, 10);
+                obj.password = hash;
                 model.dal.insertUser(obj, function(res){
                     console.log("insertado");
                     console.log(res);
@@ -41,11 +45,20 @@ function System(){
         this.dal.findUser({"email":obj.email, "confirmed":true},function(usr){
             // console.log(usr);
             // console.log(obj.email);
-            if(usr && usr.password == obj.password){
-                console.log("User: "+ usr.email + " logged");
-                callback(usr);
-            }
-            else{
+            if(usr){
+                bcrypt.compare(obj.password, usr.password, function(err, result) {
+                    if(result){
+                        console.log("User: "+ usr.email + " logged");
+                        callback(usr);
+                    }
+                    else{
+                        console.log("password incorrect");
+                        console.log("User: "+ obj.email + " not found");
+                        // user not found
+                        callback({"email":-1});
+                    }
+                })
+            }else{
                 console.log("User: "+ obj.email + " not found");
                 // user not found
                 callback({"email":-1});
