@@ -111,6 +111,26 @@ function ControlWeb(){
         });
     }
 
+    this.informativeModal = function(msg){
+        var modal = '';
+        modal += '<div id="informativeModal" class="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-gray-900 bg-opacity-50">';
+        modal += '  <div class="bg-white rounded-lg shadow-lg dark:bg-gray-800">';
+        modal += '    <div class="p-6">';
+        modal += '      <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">'+msg+'</h2>';
+        modal += '      <div class="mt-6 flex justify-end">';
+        modal += '        <button id="closeModalButton" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Close</button>';
+        modal += '      </div>';
+        modal += '    </div>';
+        modal += '  </div>';
+        modal += '</div>';
+
+        $("#informative-modal").append(modal);
+
+        $("#closeModalButton").on("click",function(){
+            $("#informativeModal").remove();
+        });
+    }
+
     this.showHomePage = function(){
         this.clean();
         let homePage = '';

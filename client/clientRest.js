@@ -8,13 +8,15 @@ function ClientRest(){
             success: function (data) {
                 console.log("data: "+data);
                 if(data.nick!=-1){
+                    window.location = "/";
                     console.log("User: "+ data.nick + " registered");
-                    localStorage.setItem("nick",data.nick);
+                    // localStorage.setItem("nick",data.nick);
                     cw.clean();
                     cw.showLogin();
-                    cw.welcomeModal(data.nick);
+                    // cw.welcomeModal(data.nick);
                     // TODO modal to show "Now use ur credentials to login"
                 }else{
+                    cw.informativeModal(data.msg);
                     console.log("User: "+ data.nick + " already exists");
                 }
             },

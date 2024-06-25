@@ -38,6 +38,7 @@ function Dal() {
             if(usrs.length==0){
                 callback(undefined);
             }else{
+                console.log("user: ", usrs[0]);
                 callback(usrs[0]);
             }
         });

@@ -17,8 +17,9 @@ function System(){
         if(!obj.nick){
             obj.nick = obj.email;
         }
-        console.log(obj);
-        this.dal.findUser(obj, async function(usr){
+        // console.log(obj);
+        this.dal.findUser({"email": obj.email}, async function(usr){
+            console.log("usr: ", usr);
             if(!usr){
                 obj.key = Date.now().toString();
                 obj.confirmed = false;
@@ -27,14 +28,15 @@ function System(){
                 obj.password = hash;
                 model.dal.insertUser(obj, function(res){
                     console.log("insertado");
-                    console.log(res);
+                    // console.log(res);
                     callback(res);
                 });
                 correo.sendEmail(obj.email, obj.key, "Confirm your account");
             }
             else{
                 // user already exists
-                callback({"email":-1});
+                console.log("User: "+ obj.email + " already exists");
+                callback({"email":-1, "msg": "User already exists"});
             }
         });
     }

@@ -72,7 +72,7 @@ app.get('/', function(req, res) {
 
 app.post('/registerUser',function(req,response){
     system.registerUser(req.body, function(res){
-        response.send({"nick":res.email});
+        response.send({"nick":res.email, "msg":res.msg});
         // response.redirect('/');
     });
 });
