@@ -82,6 +82,16 @@ function System(){
             }
         });
     }
+
+    this.deleteAccount = function(obj, callback){
+        this.dal.deleteAccount({"email": obj}, function(res){
+            if(res.deleted){
+                callback({"deleted": true});
+            }else{
+                callback({"deleted": false});
+            }
+        });
+    }
     
     this.addUser=function(nick){
         let res ={"nick":-1};

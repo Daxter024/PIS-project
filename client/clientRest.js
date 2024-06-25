@@ -56,6 +56,16 @@ function ClientRest(){
         });
     }
 
+    this.deleteAccount = function(nick){
+        $.getJSON("/deleteAccount/"+nick, function(data) {
+            if(data.deleted){
+                cw.closeSession();
+            }else{
+                console.log("User: "+ nick + " not deleted");
+            }
+        });
+    }
+
     this.addUser=function(nick){
         var cli = this;
         $.getJSON("/addUser/"+nick, function(data) {

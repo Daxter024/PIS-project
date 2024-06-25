@@ -20,6 +20,10 @@ function Dal() {
         update(this.users, usr, callback);
     }
 
+    this.deleteAccount = function(usr, callback){
+        deleteAcc(this.users, usr, callback);
+    }
+
     function findOrCreate(collection,criterio,callback)
     {
         collection.findOneAndUpdate(criterio, {$set: criterio}, {upsert: true,returnDocument:"after",projection:{email:1}}, function(err,doc) {
@@ -64,6 +68,16 @@ function Dal() {
                 console.log("Element updated");
                 callback({email:res.value.email});
             }
+        });
+    }
+
+    function deleteAcc(collection, usr, callback){
+        collection.deleteOne(usr, function(err){
+            if(err){throw err;}
+            else{
+                console.log("Element deleted");
+                callback({deleted:true});
+            } 
         });
     }
     

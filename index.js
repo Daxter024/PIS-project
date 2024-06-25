@@ -130,6 +130,13 @@ app.get('/closeSession', userLogged,function(req,res){
     }
 });
 
+app.get('/deleteAccount/:email', userLogged,function(req,res){
+    let email = req.params.email;
+    system.deleteAccount(email, function(result){
+        res.send(result);
+    });
+});
+
 app.get('/addUser/:nick', userLogged,function(req,res){
     // Should be a post request but i need to check it with postman
     let nick = req.params.nick;

@@ -21,6 +21,12 @@ function ControlWeb(){
         }
     }
 
+    this.deleteAccount = function(){
+        email = $.cookie("nick");
+        console.log(email);
+        rest.deleteAccount(email);
+    }
+
     this.showLogin = function(){
 
         $("#login-container").load("./client/login.html", function(){
@@ -60,6 +66,9 @@ function ControlWeb(){
         $("#dashboard-container").load("./client/home.html",function(){
             $("#btnLogout").on("click",function(){
                 cw.logOutModal();
+            });
+            $("#btnDelete").on("click",function(){
+                cw.deleteAccount();
             });
         });
     }
