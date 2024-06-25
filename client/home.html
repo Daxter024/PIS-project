@@ -1,0 +1,168 @@
+<div class="bg-gray-900 text-white font-sans">
+    <div id="logout-modal"></div>
+    <!-- Sidebar -->
+    <div class="flex min-h-screen">
+        <nav class="w-64 bg-gray-800 p-4">
+            <div class="text-2xl font-bold mb-4">TailAdmin</div>
+            <ul class="space-y-2">
+                <li class="bg-gray-700 rounded-md p-2">
+                    <a href="#" class="flex items-center space-x-2">
+                        <!-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h1m10 4h10M21 10H9m1-4h1m4-4h10M3 6h4m0 0v4m0-4h4m4 4H9m4 0H9m-4 8H3m4 4h10M9 10h1M9 14h4m4 0H9m0 0h1M3 14h10M3 18h4M5 18v2M9 18v2M9 6H5M5 10h4"></path>
+                        </svg> -->
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2">
+                        <span>eCommerce</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2">
+                        <span>Calendar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2">
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2">
+                        <span>Forms</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2">
+                        <span>Tables</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2">
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2">
+                        <span>Chart</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2">
+                        <span>UI Elements</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2">
+                        <span>Authentication</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <div class="flex justify-between items-center mb-6">
+                <div class="font-bold text-xl">Dashboard</div>
+                <div class="flex items-center space-x-4">
+                    <button id="btnLogout" class="p-2 rounded-full bg-gray-700">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/>
+                          </svg>
+                    </button>
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/150" alt="User Avatar" class="w-8 h-8 rounded-full">
+                        <div class="absolute right-0 bottom-0 bg-green-500 rounded-full w-2 h-2"></div>
+                    </div>
+                    <div>
+                        <div>Session</div>
+                        <div class="text-sm text-gray-400">UX Designer</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="flex items-center space-x-4">
+                        <div class="p-3 rounded-full bg-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405C18.605 15.21 19 14.105 19 13c0-2.21-1.79-4-4-4s-4 1.79-4 4c0 1.105.395 2.21 1.405 3.405L9 17h6z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold">$3.456K</div>
+                            <div class="text-gray-400">Total views</div>
+                            <div class="text-green-500">0.43% ↑</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="flex items-center space-x-4">
+                        <div class="p-3 rounded-full bg-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold">$45.2K</div>
+                            <div class="text-gray-400">Total Profit</div>
+                            <div class="text-green-500">4.35% ↑</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="flex items-center space-x-4">
+                        <div class="p-3 rounded-full bg-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold">2,450</div>
+                            <div class="text-gray-400">Total Product</div>
+                            <div class="text-green-500">2.59% ↑</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="flex items-center space-x-4">
+                        <div class="p-3 rounded-full bg-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2H5z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold">3,456</div>
+                            <div class="text-gray-400">Total Users</div>
+                            <div class="text-red-500">0.95% ↓</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <!-- <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="text-lg">Total Revenue</div>
+                        <div class="text-gray-400">12.04.2022 - 12.05.2022</div>
+                    </div>
+                    <div class="h-40 bg-gray-700 rounded-lg">
+                        Aquí iría tu gráfico de líneas
+                    </div>
+                </div> -->
+                <!-- <div class="bg-gray-800 p-6 rounded-lg">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="text-lg">Profit this week</div>
+                        <div class="text-gray-400">This Week</div>
+                    </div>
+                    <div class="h-40 bg-gray-700 rounded-lg">
+                        Aquí iría tu gráfico de barras
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

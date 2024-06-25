@@ -36,7 +36,8 @@ function ClientRest(){
                     console.log("User: " + data.email + " logged");
                     cookie ? $.cookie("nick", data.email) : console.log("no remember");
                     cw.clean();
-                    cw.showHomePage();
+                    // cw.showHomePage();
+                    cw.showDashboard();
                 }else{
                     console.log("User: " + data.email + " doesn't exist");
                 }

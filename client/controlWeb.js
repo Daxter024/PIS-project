@@ -8,13 +8,14 @@ function ControlWeb(){
         $("#login-container").empty();
         $("#register-container").empty();
         $("#homePage").empty();
+        $("#dashboard-container").empty();
     }
 
     this.checkSession = function(){
         let nick = $.cookie("nick");
         if(nick){
+            cw.showDashboard();
             cw.welcomeModal(nick);
-            cw.showHomePage();
         }else{
             cw.showLogin();
         }
@@ -54,6 +55,15 @@ function ControlWeb(){
         });
     }
 
+    this.showDashboard = function(){
+        this.clean();
+        $("#dashboard-container").load("./client/home.html",function(){
+            $("#btnLogout").on("click",function(){
+                cw.logOutModal();
+            });
+        });
+    }
+
     this.welcomeModal = function(nick){
         let modal = '';
         modal += '<div id="welcomeModal" class="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-gray-900 bg-opacity-50">';
@@ -76,6 +86,31 @@ function ControlWeb(){
         });
     }
 
+    this.logOutModal = function(){
+        var modal = '';
+        modal += '<div id="logoutModal" class="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-gray-900 bg-opacity-50">';
+        modal += '  <div class="bg-white rounded-lg shadow-lg dark:bg-gray-800">';
+        modal += '    <div class="p-6">';
+        modal += '      <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Are you sure you want to logout?</h2>';
+        modal += '      <div class="mt-6 flex justify-end space-x-4">';
+        modal += '        <button id="cancelButton" class="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500">Cancel</button>';
+        modal += '        <button id="confirmButton" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">Logout</button>';
+        modal += '      </div>';
+        modal += '    </div>';
+        modal += '  </div>';
+        modal += '</div>';
+
+        $("#logout-modal").append(modal);
+
+        $("#cancelButton").on("click",function(){
+            $("#logoutModal").remove();
+        });
+
+        $("#confirmButton").on("click",function(){
+            cw.closeSession();
+        });
+    }
+
     this.showHomePage = function(){
         this.clean();
         let homePage = '';
@@ -90,7 +125,6 @@ function ControlWeb(){
         $("#homePage").append(homePage);
 
         $("#logoutButton").on("click",function(){
-            // rest.closeSession();
             cw.closeSession();
         });
     }
