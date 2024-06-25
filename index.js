@@ -52,6 +52,7 @@ app.post('/oneTap/callback', passport.authenticate('google-one-tap', {failureRed
 
 app.get('/failure', function(req, res) {
     // res.send({nick:"nook"});
+    console.log("failure");
     res.redirect('/');
 });
 
@@ -80,7 +81,7 @@ app.post('/registerUser',function(req,response){
 app.post('/loginUser', passport.authenticate('local', {failureRedirect: '/failure', successRedirect: '/ok'}));
 
 app.get('/ok', function(req, res) {
-    res.send({email:req.user.email});
+    res.send({email:req.user.email, msg:req.user.msg});
 });
 
 // app.post('/loginUser',  function(req, res) {

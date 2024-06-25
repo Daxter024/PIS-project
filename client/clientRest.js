@@ -10,12 +10,12 @@ function ClientRest(){
                 if(data.nick!=-1){
                     window.location = "/";
                     console.log("User: "+ data.nick + " registered");
-                    // localStorage.setItem("nick",data.nick);
                     cw.clean();
                     cw.showLogin();
-                    // cw.welcomeModal(data.nick);
-                    // TODO modal to show "Now use ur credentials to login"
+                    cw.informativeModal(data.msg);
                 }else{
+                    window.location = "/";
+                    cw.showSignUp();
                     cw.informativeModal(data.msg);
                     console.log("User: "+ data.nick + " already exists");
                 }
@@ -35,12 +35,14 @@ function ClientRest(){
             data: JSON.stringify({"email": email, "password": password}),
             success: function(data) {
                 if(data.email != -1){
+                    // window.location = "/";
                     console.log("User: " + data.email + " logged");
                     cookie ? $.cookie("nick", data.email) : console.log("no remember");
-                    cw.clean();
-                    // cw.showHomePage();
+                    // cw.clean();
                     cw.showDashboard();
                 }else{
+                    // window.location = "/";
+                    cw.informativeModal(data.msg);
                     console.log("User: " + data.email + " doesn't exist");
                 }
             }

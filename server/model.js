@@ -28,6 +28,7 @@ function System(){
                 obj.password = hash;
                 model.dal.insertUser(obj, function(res){
                     console.log("insertado");
+                    res.msg = "Go confirm your account";
                     // console.log(res);
                     callback(res);
                 });
@@ -57,13 +58,13 @@ function System(){
                         console.log("password incorrect");
                         console.log("User: "+ obj.email + " not found");
                         // user not found
-                        callback({"email":-1});
+                        callback({"email":-1, "msg": "Email or password incorrect"});
                     }
                 })
             }else{
                 console.log("User: "+ obj.email + " not found");
                 // user not found
-                callback({"email":-1});
+                callback({"email":-1, "msg": "User not found or not confirmed"});
             }
         });
     }
