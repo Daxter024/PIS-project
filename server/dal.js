@@ -88,7 +88,7 @@ function Dal() {
         let database_secret;
         varmg.getOptions("DATABASE", function(res){
             console.log("Database: "+res);
-            database_secret = res[database];
+            database_secret = res.database;
         });
         let client = new mongo("mongodb+srv://"+database_secret+".mongodb.net/?retryWrites=true&w=majority");
         await client.connect();
