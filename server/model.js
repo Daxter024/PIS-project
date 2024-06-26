@@ -2,9 +2,10 @@ const data=require("./dal.js");
 const correo = require("./email.js");
 const bcrypt = require('bcrypt');
 
-function System(){
+function System(test){
     this.users={};
     this.dal = new data.Dal();
+    this.test = test;
 
     this.googleUser=function(usr,callback){
         this.dal.findOrCreateUser(usr, function(obj){
@@ -142,10 +143,11 @@ function System(){
         res.num = Object.keys(this.users).length;
         return res;
     }
-
-    this.dal.connect(function(db){
-        console.log("Database connected");
-    });
+    if(!this.test){
+        this.dal.connect(function(){
+            console.log("Database connected");
+        });
+    }
 }
 
 function User(nick){

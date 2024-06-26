@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 // If PORT environment is not defined, use 3000 as default port
 
 app.use(express.static(__dirname + "/"));
-let system = new model.System();
+let system = new model.System(false);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

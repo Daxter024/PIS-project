@@ -4,9 +4,13 @@ describe("System ...", function() {
     let system;
 
     beforeEach(function() {
-        system = new model.System();
+        system = new model.System(true);
         user = 'user';
         user2 = 'user2';
+        user3 = {
+            "email": "xxfranxx068@gmail.com",
+            "pasword": "123456"
+        }
     });
 
     it('No users', function(){
@@ -41,7 +45,7 @@ describe("System ...", function() {
         expect(system.activeUser(user2)).toEqual({active: false});
     });
 
-    xit('Delete user', function(){
+    it('Delete user', function(){
         expect(system.numberUsers()).toEqual({num: 0});
         system.addUser(user);
         expect(system.numberUsers()).toEqual({num: 1});
