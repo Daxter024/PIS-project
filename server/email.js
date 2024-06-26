@@ -1,14 +1,31 @@
 const nodemailer = require("nodemailer");
 require('dotenv').config();     // need it to use .env
 const url = "http://localhost:3000";
+const varmg = require("./varManagement.js");
 // const url = ""; // deployment url
 
-const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: process.env.EMAIL,
-        pass: process.env.EMAIL_PASSWORD
-    }
+
+// const transporter = nodemailer.createTransport({
+//     service: "gmail",
+//     auth: {
+//         user: process.env.EMAIL,
+//         pass: process.env.EMAIL_PASSWORD
+//     }
+// });
+let options = {
+    user : "",
+    pass : ""
+}
+
+let transporter;
+
+varmg.getOptions("EMAIL",function(res){
+    console.log("i am in getOptions");
+    options = res;
+    transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: options
+    });
 });
 
 module.exports.sendEmail = async function(email, key, men){

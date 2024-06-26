@@ -1,6 +1,8 @@
 //data accesss layer
 const mongo = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectId;
+const varmg = require("./varManagement.js");
+
 function Dal() {
     this.users;
 
@@ -83,7 +85,12 @@ function Dal() {
     
     this.connect = async function(callback){
         let dal = this;
-        let client = new mongo("mongodb+srv://"+process.env.DATABASE+".mongodb.net/?retryWrites=true&w=majority");
+        let database_secret;
+        varmg.getOptions("DATABASE", function(res){
+            console.log("Database: "+res);
+            database_secret = res[database];
+        });
+        let client = new mongo("mongodb+srv://"+database_secret+".mongodb.net/?retryWrites=true&w=majority");
         await client.connect();
         const database = client.db("sistema");
         dal.users=database.collection("usuarios");
