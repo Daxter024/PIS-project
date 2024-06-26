@@ -40,11 +40,19 @@ passport.use(new LocalStrategy({
 // API endpoints
 
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-
 app.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failure' }), function(req, res) {
     // res.redirect('/home');
     res.redirect('/good')
 });
+
+app.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }));
+app.get('/github/callback', 
+    passport.authenticate('github', { failureRedirect: '/failure' }), 
+    function(req, res) {
+        res.redirect('/good');
+    }
+);
+
 
 app.post('/oneTap/callback', passport.authenticate('google-one-tap', {failureRedirect: '/failure'}), function(req, res) {
     res.redirect('/good');
@@ -56,12 +64,34 @@ app.get('/failure', function(req, res) {
     res.redirect('/');
 });
 
+// app.get('/good', function(req, res) {
+//     let email = req.user.emails[0].value;
+//     system.googleUser({"email":email},function(obj){
+//         res.cookie("nick", obj.email);
+//         res.redirect('/');
+//     });
+// });
+
 app.get('/good', function(req, res) {
-    let email = req.user.emails[0].value;
-    system.googleUser({"email":email},function(obj){
-        res.cookie("nick", obj.email);
-        res.redirect('/');
-    });
+    switch (req.user.provider){
+        case "google":
+            let email = req.user.emails[0].value;
+            system.googleUser({"email":email},function(obj){
+                res.cookie("nick", obj.email);
+                res.redirect('/');
+            });
+            break;
+        case "github":
+            let username = req.user.username;
+            system.OAuthUser({"email":username},function(obj){
+                res.cookie("nick", obj.email);
+                res.redirect('/');
+            });
+            break;
+        default:
+            res.redirect('/');
+            break;
+    }
 });
 
 

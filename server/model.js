@@ -12,6 +12,18 @@ function System(){
         });
     }
 
+    this.OAuthUser = function(usr, callback){
+        let copy = usr;
+        usr.confirmed = true;
+        this.dal.findOrCreateUser(usr, function(obj){
+            if(!obj.email){
+                console.log("User "+ usr.email+" already exists");
+                obj.email = copy
+            }
+            callback(obj);
+        });
+    }
+
     this.registerUser=function(obj, callback){
         let model = this;
         if(!obj.nick){
