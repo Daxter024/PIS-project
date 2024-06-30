@@ -9,26 +9,24 @@ let client_id;
 let client_secret;
 
 varmg.getOptions("USER_ID",function(res){
-    client_id = res.client_id;
-    client_secret = res.client_secret;
-})
-
-passport.use(new GoogleStrategy({
-    clientID: client_id,
-    clientSecret: client_secret,
-    callbackURL: "https://procesos-6uh7rw7fha-no.a.run.app/google/callback"
-    },
-    function(accessToken, refreshToken, profile, done) {
-        return done(null, profile);
-    }
-));
+    console.log("i am in getOptions");
+    passport.use(new GoogleStrategy({
+        clientID: res.client_id,
+        clientSecret: res.client_secret,
+        callbackURL: "http://localhost:3000/google/callback"
+        },
+        function(accessToken, refreshToken, profile, done) {
+            return done(null, profile);
+        }
+    ));
+});
 
 varmg.getOptions("GITHUB",function(res){
     console.log("i am in getOptions");
     passport.use(new GitHubStrategy({
         clientID: res.client_id,
         clientSecret: res.client_secret,
-        callbackURL: "https://procesos-6uh7rw7fha-no.a.run.app/github/callback"
+        callbackURL: "http://localhost:3000/github/callback"
         },
         function(accessToken, refreshToken, profile, done) {
             return done(null, profile);
@@ -41,7 +39,7 @@ varmg.getOptions("ONETAP",function(res){
     passport.use(new GoogleOneTapStrategy({
         clientID: res.client_id,
         clientSecret: res.client_secret,
-        callbackURL: "https://procesos-6uh7rw7fha-no.a.run.app/google/callback"
+        callbackURL: "http://localhost:3000/google/callback"
         },
         function(accessToken, refreshToken, profile, done) {
             return done(null, profile);
