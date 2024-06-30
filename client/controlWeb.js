@@ -68,7 +68,8 @@ function ControlWeb(){
                 cw.logOutModal();
             });
             $("#btnDelete").on("click",function(){
-                cw.deleteAccount();
+                cw.deleteAccModal();
+                // cw.deleteAccount();
             });
         });
     }
@@ -117,6 +118,31 @@ function ControlWeb(){
 
         $("#confirmButton").on("click",function(){
             cw.closeSession();
+        });
+    }
+
+    this.deleteAccModal = function(){
+        var modal = '';
+        modal += '<div id="deleteModal" class="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-gray-900 bg-opacity-50">';
+        modal += '  <div class="bg-white rounded-lg shadow-lg dark:bg-gray-800">';
+        modal += '    <div class="p-6">';
+        modal += '      <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Are you sure you want to delete your account?</h2>';
+        modal += '      <div class="mt-6 flex justify-end space-x-4">';
+        modal += '        <button id="cancelButton" class="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500">Cancel</button>';
+        modal += '        <button id="confirmButton" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">Delete</button>';
+        modal += '      </div>';
+        modal += '    </div>';
+        modal += '  </div>';
+        modal += '</div>';
+
+        $("#logout-modal").append(modal);
+
+        $("#cancelButton").on("click",function(){
+            $("#deleteModal").remove();
+        });
+
+        $("#confirmButton").on("click",function(){
+            cw.deleteAccount();
         });
     }
 
